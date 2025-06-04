@@ -1,70 +1,94 @@
-# 📋 Langford Log App
+# 🛠️ Langford Log App
 
-The Langford Log App is a mobile app for foremen to submit daily job logs, including worker names, hours worked, descriptions of work completed, and optional photo attachments. Logs are emailed to an admin address upon submission.
-
----
-
-## 🔧 Tech Stack
-
-- **Frontend**: React Native (with Expo), Firebase Authentication
-- **Backend**: Node.js, Express, Nodemailer, Multer (for file upload)
-- **Deployment**: Render (Backend API)
+**Built for Langford Mechanical and Sheet Metal, INC**, the Langford Log App is a mobile-friendly tool designed for foremen to submit detailed daily job logs. The app allows capturing employee hours, task descriptions, and photo evidence — and automatically emails the compiled log to an admin address.
 
 ---
 
-## 📱 Features
+## 🚀 Features
 
-- Signup/Login with Firebase Auth
-- Submit a daily log:
-  - Foreman name, date, job number
-  - Add up to 20 employees with work hours
-  - Attach up to 20 images
-- Automatically sends a formatted email with attachments
-- Responsive UI using React Native components
-- Data persistence via `local` state and Firebase session handling
+- 📧 Firebase-based user authentication (Signup/Login)
+- 👷 Add up to 20 employees with hours worked
+- 📝 Record task description and job details
+- 📸 Attach up to 20 photos (compressed for speed)
+- 📤 Auto-email submission with log + attachments
+- 🌐 Backend deployed on [Render](https://render.com)
 
 ---
 
-## 📂 Project Structure
+## 🧱 Tech Stack
 
-```bash
-.
-├── App.js                 # App entry point and navigation setup
-├── index.js              # Expo entry point
-├── firebase.js           # Firebase initialization
+**Frontend:**
+
+- React Native (Expo)
+- Firebase Auth
+- Expo Image Picker
+
+**Backend:**
+
+- Node.js + Express
+- Multer (file uploads)
+- Nodemailer (emailing logs)
+- Deployed on Render
+
+---
+
+## 📁 Project Structure
+
+LangfordLog/
+├── App.js
+├── index.js
+├── firebase.js
+├── metro.config.js
 ├── screens/
-│   ├── LoginScreen.js
-│   ├── SignupScreen.js
-│   └── LogEntryScreen.js
-├── server.js             # Express backend for log submission and email
-├── metro.config.js       # Metro bundler config to support Firebase ESM
-└── uploads/              # Temporary upload folder used by multer
-🚀 Setup Instructions
-1. Firebase Setup (Frontend)
-Ensure you have a Firebase project set up and update the firebaseConfig in firebase.js.
+│ ├── LoginScreen.js
+│ ├── SignupScreen.js
+│ └── LogEntryScreen.js
+├── backend/
+│ └── server.js
 
-js
+yaml
 Copy
 Edit
-const firebaseConfig = {
-  apiKey: 'YOUR_API_KEY',
-  authDomain: 'YOUR_PROJECT.firebaseapp.com',
-  projectId: 'YOUR_PROJECT',
-  storageBucket: 'YOUR_PROJECT.appspot.com',
-  messagingSenderId: '...',
-  appId: '...',
-};
-2. Running the Frontend
-You must have Node.js and Expo CLI installed:
 
+---
+
+## 🔧 Local Setup
+
+### 1. Prerequisites
+
+- Node.js ≥ 16
+- Expo CLI: `npm install -g expo-cli`
+
+---
+
+### 2. Firebase Setup
+
+Update `firebase.js` with your Firebase credentials:
+
+```js
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT.firebaseapp.com",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_PROJECT.appspot.com",
+  messagingSenderId: "YOUR_SENDER_ID",
+  appId: "YOUR_APP_ID"
+};
+3. Start the Frontend
 bash
 Copy
 Edit
-npm install -g expo-cli
 npm install
 expo start
-3. Running the Backend Locally
-Install dependencies and start the server:
+4. Backend Setup
+Create a .env file in your backend folder:
+
+env
+Copy
+Edit
+EMAIL_USER=your_email@domain.com
+EMAIL_PASS=your_email_password_or_app_password
+Then run:
 
 bash
 Copy
@@ -72,21 +96,12 @@ Edit
 cd backend
 npm install
 node server.js
-Make sure to create a .env file for environment variables:
-
-env
-Copy
-Edit
-EMAIL_USER=your_email@domain.com
-EMAIL_PASS=your_email_password_or_app_password
 🌍 Deploying Backend to Render
-Push your backend code to GitHub
+Push your backend to a GitHub repo.
 
-Go to render.com and create a new Web Service
+Go to Render.com → New Web Service.
 
-Set the following Render configuration:
-
-Environment: Node
+Set these Render options:
 
 Build Command: npm install
 
@@ -98,44 +113,47 @@ EMAIL_USER
 
 EMAIL_PASS
 
-Set up CORS: Your frontend will make requests to this endpoint, so CORS is enabled in server.js.
+Copy your live Render URL.
 
-Update the frontend API endpoint
-
-In LogEntryScreen.js, change the fetch URL to your Render-deployed backend endpoint:
+In LogEntryScreen.js, update the fetch call:
 
 js
 Copy
 Edit
-fetch('https://your-backend.onrender.com/submit-log', ...)
-📧 Email Format Example
-text
+const response = await fetch('https://your-backend-url.onrender.com/submit-log', {
+  method: 'POST',
+  body: formData
+});
+📬 Sample Email Output
+yaml
 Copy
 Edit
-Subject: Daily Log - 06/01/2025 - John Doe
+Subject: Daily Log - 06/04/2025 - John Doe
 
 Foreman: John Doe
-Date: 06/01/2025
-Job #: 172
+Date: 06/04/2025
+Job #: 12345
 
 Employees:
 1. Employee 1 - 8 hours
-2. Employee 2 - 7 hours
-...
+2. Employee 2 - 7.5 hours
 
 Task Description:
-Completed framing for unit #3 and started on roofing.
-Attached photos will be included in the email as JPEG attachments.
+Framed the east wall and poured foundation for HVAC units.
+Photos are attached directly to the email.
 
-✅ To-Do / Enhancements
-Add error/success modals instead of alert()
+📌 Future Improvements
+Offline draft saving
 
-Store past logs in Firebase Firestore
+Admin dashboard for viewing logs
 
-Offline-first data saving with background sync
+Image compression before upload
 
-Admin web dashboard to view logs
+Firebase Firestore history tracking
 
-🙌 Author
-Built by Cole Puls
-GitHub: @colepuls
+👨‍💻 Author
+Made with care by Cole Puls
+GitHub: github.com/colepuls
+
+📝 License
+Licensed under the MIT License.
