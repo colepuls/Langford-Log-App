@@ -23,6 +23,7 @@ const EMPLOYEE_DIRECTORY = Array.from({ length: 20 }, (_, i) => `Employee ${i + 
 export default function LogEntryScreen({ route }) {
   const { userEmail } = route.params;
   const [foremanName, setForemanName] = useState('');
+  const [foremanHours, setForemanHours] = useState({});
   const [date, setDate] = useState('');
   const [jobNumber, setJobNumber] = useState('');
   const [selectedEmployees, setSelectedEmployees] = useState([]);
@@ -88,6 +89,7 @@ export default function LogEntryScreen({ route }) {
     }));
 
     formData.append('foreman', foremanName);
+    formData.append('foremanHours', foremanHours);
     formData.append('date', date);
     formData.append('jobNumber', jobNumber);
     formData.append('employees', JSON.stringify(employees));
@@ -104,7 +106,7 @@ export default function LogEntryScreen({ route }) {
 
     try {
       const response = await fetch(
-          'https://langford-log-backend.onrender.com/submit-log',
+          'https://langford-log-app.onrender.com/submit-log',
           { method: 'POST', body: formData },
       );
 
@@ -113,7 +115,9 @@ export default function LogEntryScreen({ route }) {
       alert('Log submitted successfully!');
 
       setForemanName('');
+      setForemanHours({});
       setDate('');
+      setJobNumber('');
       setSelectedEmployees([]);
       setEmployeeHours({});
       setTaskDescription('');
@@ -148,6 +152,15 @@ export default function LogEntryScreen({ route }) {
                 placeholder="Enter foreman name"
                 value={foremanName}
                 onChangeText={setForemanName}
+              />
+
+              <Text style={styles.label}>Foreman Hours:</Text>
+              <TextInput
+                style={styles.input}
+                placeholder="Enter foreman hours"
+                value={foremanHours}
+                onChangeText={setForemanHours}
+                keyboardType="numeric"
               />
 
               <Text style={styles.label}>Date:</Text>
@@ -193,7 +206,7 @@ export default function LogEntryScreen({ route }) {
                     onChangeText={(text) => updateHours(emp, text)}
                   />
                   <Pressable onPress={() => handleRemoveEmployee(emp)}>
-                    <Text style={styles.removeButton}>❌</Text>
+                    <Text style={styles.removeButton}>delete</Text>
                   </Pressable>
                 </View>
               ))}

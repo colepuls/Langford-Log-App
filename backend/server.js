@@ -11,8 +11,8 @@ const upload = multer({ dest: 'uploads/' });
 app.use(cors());
 app.use(express.json());
 
-app.post('/submit-log', upload.array('photos', 10), async (req, res) => {
-  const { foreman, date, jobNumber, employees, taskDescription, userEmail } = req.body;
+app.post('/submit-log', upload.array('photos', 20), async (req, res) => {
+  const { foreman, foremanHours, date, jobNumber, employees, taskDescription, userEmail } = req.body;
   const parsedEmployees = JSON.parse(employees || '[]');
 
   const transporter = nodemailer.createTransport({
@@ -35,7 +35,7 @@ app.post('/submit-log', upload.array('photos', 10), async (req, res) => {
     to: 'coleberr6@gmail.com',
     subject: `Daily Log - ${date} - ${foreman}`,
     text: `
-Foreman: ${foreman}
+Foreman: ${foreman} - Hours: ${foremanHours}
 Date: ${date}
 Job #: ${jobNumber}
 
