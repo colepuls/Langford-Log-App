@@ -25,7 +25,7 @@ export default function LogEntryScreen({ route }) {
   const [foremanName, setForemanName] = useState('');
   const [foremanHours, setForemanHours] = useState({});
   const [date, setDate] = useState('');
-  const [jobNumber, setJobNumber] = useState('');
+  const [jobNumber, setJobNumber] = useState({});
   const [selectedEmployees, setSelectedEmployees] = useState([]);
   const [employeeHours, setEmployeeHours] = useState({});
   const [taskDescription, setTaskDescription] = useState('');
@@ -139,7 +139,7 @@ export default function LogEntryScreen({ route }) {
       setForemanName('');
       setForemanHours({});
       setDate('');
-      setJobNumber('');
+      setJobNumber({});
       setSelectedEmployees([]);
       setEmployeeHours({});
       setTaskDescription('');
@@ -190,7 +190,20 @@ export default function LogEntryScreen({ route }) {
                 style={styles.input}
                 placeholder="MM/DD/YYYY"
                 value={date}
-                onChangeText={setDate}
+                onChangeText={(text) => {
+                  const cleaned = text.replace(/\D/g, '');
+                  let formatted = cleaned;
+
+                  if (cleaned.length >= 3 && cleaned.length <= 4) {
+                    formatted = `${cleaned.slice(0, 2)}/${cleaned.slice(2)}`;
+                  }
+
+                  else if (cleaned.length > 4) {
+                    formatted = `${cleaned.slice(0, 2)}/${cleaned.slice(2, 4)}/${cleaned.slice(4, 8)}`;
+                  }
+
+                  setDate(formatted);
+                }}
                 keyboardType="numeric"
               />
 
@@ -200,6 +213,7 @@ export default function LogEntryScreen({ route }) {
                 placeholder="Enter job number"
                 value={jobNumber}
                 onChangeText={setJobNumber}
+                keyboardType="numeric"
               />
 
               <Text style={styles.label}>Add Employee:</Text>
