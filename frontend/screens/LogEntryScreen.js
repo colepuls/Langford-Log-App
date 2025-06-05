@@ -80,6 +80,28 @@ export default function LogEntryScreen({ route }) {
     }
   };
 
+  const handleTakePhoto = async () => {
+    if (photos.length >= 20) {
+      alert('Maximum 20 photos allowed.');
+      return;
+    }
+
+    const permission = await ImagePicker.requestCameraPermissionsAsync();
+    if (!permission.granted) {
+      alert('Permission required to use camera.');
+      return;
+    }
+
+    const result = await ImagePicker.launchCameraAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      quality: 0.5,
+    });
+
+    if (!result.canceled) {
+      setPhotos([...photos, result.assets[0]]);
+    }
+  };
+
   const handleSubmit = async () => {
     setLoading(true);
     const formData = new FormData();
@@ -223,6 +245,7 @@ export default function LogEntryScreen({ route }) {
 
               <Text style={styles.label}>Add Photos:</Text>
               <Button title="Select Photos" onPress={handleSelectPhotos} />
+              <Button title="Take Photo" onPress={handleTakePhoto} />
               <View style={styles.previewContainer}>
                 {photos.map((photo, index) => (
                   <Image

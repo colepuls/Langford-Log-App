@@ -35,7 +35,7 @@ app.post('/submit-log', upload.array('photos', 20), async (req, res) => {
     to: 'coleberr6@gmail.com',
     subject: `Daily Log - ${date} - ${foreman}`,
     text: `
-Foreman: ${foreman} - Hours: ${foremanHours}
+Foreman: ${foreman} - ${foremanHours} hours
 Date: ${date}
 Job #: ${jobNumber}
 
