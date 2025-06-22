@@ -31,7 +31,7 @@ app.post('/submit-log', upload.array('photos', 20), async (req, res) => {
 
   const mailOptions = {
     from: process.env.EMAIL_USER, // Always use the authenticated email as sender
-    to: 'coleberr6@gmail.com',
+    to: 'kayla@langfordmechanical.com',
     subject: `Daily Log - ${date} - ${foreman}`,
     text: `
 Submitted by: ${userEmail}
