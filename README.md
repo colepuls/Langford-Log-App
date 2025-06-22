@@ -22,7 +22,7 @@ The Langford Log app streamlines the daily reporting process for construction fo
 
 ## 🎥 App Demo
 
-![App Demo](https://www.youtube.com/shorts/lHF7pt2mtyU)
+[![App Demo](https://img.youtube.com/vi/lHF7pt2mtyU/0.jpg)](https://www.youtube.com/shorts/lHF7pt2mtyU)
 
 *Demo video showing the complete workflow from login to log submission*
 
