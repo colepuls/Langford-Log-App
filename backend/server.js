@@ -15,13 +15,12 @@ app.post('/submit-log', upload.array('photos', 20), async (req, res) => {
   const { foreman, foremanHours, date, jobNumber, employees, taskDescription, userEmail } = req.body;
   const parsedEmployees = JSON.parse(employees || '[]');
 
-  const transporter = nodemailer.createTransport({
-    host: 'smtp.mail.me.com',
-    port: 587,
-    secure: false, // STARTTLS
+  // Use Gmail SMTP for better reliability
+  const transporter = nodemailer.createTransporter({
+    service: 'gmail',
     auth: {
       user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS,
+      pass: process.env.EMAIL_PASS, // Use App Password for Gmail
     },
   });
 
@@ -31,10 +30,11 @@ app.post('/submit-log', upload.array('photos', 20), async (req, res) => {
   }));
 
   const mailOptions = {
-    from: userEmail || process.env.EMAIL_USER,
+    from: process.env.EMAIL_USER, // Always use the authenticated email as sender
     to: 'coleberr6@gmail.com',
     subject: `Daily Log - ${date} - ${foreman}`,
     text: `
+Submitted by: ${userEmail}
 Foreman: ${foreman} - ${foremanHours} hours
 Date: ${date}
 Job #: ${jobNumber}
@@ -50,19 +50,18 @@ ${taskDescription}
 
   try {
     await transporter.sendMail(mailOptions);
-    console.log('Email sent successfully.');
+    console.log('Email sent successfully from:', userEmail);
     res.json({ success: true });
   } catch (err) {
     console.error('Email failed:', err);
-    res.status(500).json({ error: 'Failed to send email' });
+    res.status(500).json({ error: 'Failed to send email: ' + err.message });
   } finally {
     // Clean up uploaded photos
     req.files.forEach(file => fs.unlink(file.path, () => {}));
   }
 });
 
-
-const PORT = 4000;
+const PORT = process.env.PORT || 4000;
 app.listen(PORT, () => {
-  console.log(`API running on http://localhost:${PORT}`);
+  console.log(`API running on port ${PORT}`);
 });
