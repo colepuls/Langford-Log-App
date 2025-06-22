@@ -13,7 +13,13 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "Langford-Log",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false,
+        "NSCameraUsageDescription": "Allow Langford Log to access your camera.",
+        "NSPhotoLibraryUsageDescription": "Allow Langford Log to access your photos."
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -21,8 +27,17 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "package": "com.yomonos.frontend"
+      "package": "com.yomonos.frontend",
+      "permissions": [
+        "CAMERA",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE"
+      ]
     },
+    "plugins": [
+      "expo-image-picker",
+      "expo-camera"
+    ],
     "extra": {
       "eas": {
         "projectId": "15540ac3-418e-4059-a4d2-eaa35701c5bc"

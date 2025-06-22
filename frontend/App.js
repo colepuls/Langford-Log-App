@@ -4,6 +4,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import LoginScreen from './screens/LoginScreen';
 import SignupScreen from './screens/SignupScreen';
 import LogEntryScreen from './screens/LogEntryScreen';
+import AdminScreen from './screens/AdminScreen';
 import { firebaseAuth } from './firebase';
 import { onAuthStateChanged } from 'firebase/auth';
 import { ActivityIndicator, View } from 'react-native';
@@ -20,7 +21,7 @@ export default function App() {
       if (initializing) setInitializing(false);
     });
 
-    return unsubscribe; // Cleanup subscription on unmount
+    return unsubscribe;
   }, [initializing]);
 
   if (initializing) {
@@ -35,11 +36,14 @@ export default function App() {
     <NavigationContainer>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         {user ? (
-          <Stack.Screen
-            name="LogEntry"
-            component={LogEntryScreen}
-            initialParams={{ userEmail: user.email }}
-          />
+          <>
+            <Stack.Screen
+              name="LogEntry"
+              component={LogEntryScreen}
+              initialParams={{ userEmail: user.email }}
+            />
+            <Stack.Screen name="Admin" component={AdminScreen} />
+          </>
         ) : (
           <>
             <Stack.Screen name="Login" component={LoginScreen} />
