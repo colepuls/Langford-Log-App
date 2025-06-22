@@ -20,6 +20,14 @@ The Langford Log app streamlines the daily reporting process for construction fo
 
 ---
 
+## 🎥 App Demo
+
+![App Demo](/Users/colepuls/ytvids/video-output-887FE402-07FB-4CA1-996B-8D98312CA93D-1.mov)
+
+*Demo video showing the complete workflow from login to log submission*
+
+---
+
 ## ✨ Key Features
 
 ### 🔐 Secure Authentication
