@@ -16,7 +16,7 @@ app.post('/submit-log', upload.array('photos', 20), async (req, res) => {
   const parsedEmployees = JSON.parse(employees || '[]');
 
   // Use Gmail SMTP for better reliability
-  const transporter = nodemailer.createTransporter({
+  const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
       user: process.env.EMAIL_USER,
