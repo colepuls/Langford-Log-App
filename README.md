@@ -206,12 +206,10 @@ All equipment tested and operational. Ready for final inspection.
 
 ---
 
-## 📞 Support & Contact
+## ✍️ Author
 
 **Developer:** Cole Puls  
 **GitHub:** [https://github.com/colepuls](https://github.com/colepuls)
-
-For technical support or feature requests, please contact the development team.
 
 ---
 
