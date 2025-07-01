@@ -50,6 +50,14 @@ Daily logs are automatically emailed with:
 - Task descriptions  
 - Photo attachments
 
+## Screenshots
+
+<div align="center">
+  <img src="assets/Simulator Screenshot - iPhone Xs Max - 2025-07-01 at 16.30.06.png" width="250" alt="App Screenshot 1" />
+  <img src="assets/Simulator Screenshot - iPhone Xs Max - 2025-07-01 at 16.30.15.png" width="250" alt="App Screenshot 2" />
+  <img src="assets/Simulator Screenshot - iPhone Xs Max - 2025-07-01 at 16.31.04.png" width="250" alt="App Screenshot 3" />
+</div>
+
 ## Development
 
 The app uses modern React Native patterns with component-based architecture. Images are compressed for email delivery, and authentication is handled securely through Firebase.
