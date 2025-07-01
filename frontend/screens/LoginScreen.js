@@ -46,7 +46,7 @@ export default function LoginScreen({ navigation }) {
     
     try {
       await signInWithEmailAndPassword(firebaseAuth, email.trim().toLowerCase(), password);
-      navigation.replace('LogEntry', { userEmail: email.trim().toLowerCase() });
+      // Navigation is handled automatically by App.js based on authentication state
     } catch (err) {
       let errorMessage = 'Login failed. Please try again.';
       

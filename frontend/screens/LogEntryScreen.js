@@ -6,9 +6,6 @@ import {
   StyleSheet,
   Button,
   ScrollView,
-  KeyboardAvoidingView,
-  Platform,
-  TouchableWithoutFeedback,
   Keyboard,
   ActivityIndicator,
   Image,
@@ -237,8 +234,9 @@ export default function LogEntryScreen({ route }) {
     }
   };
 
-  const renderDropdownItem = (item, onSelect, currentValue, isEmployee = false) => (
+  const renderDropdownItem = (item, onSelect, currentValue, isEmployee = false, key) => (
     <TouchableOpacity
+      key={key}
       style={[
         styles.dropdownItem,
         currentValue === item && styles.dropdownItemSelected
@@ -263,50 +261,44 @@ export default function LogEntryScreen({ route }) {
 
   return (
     <SafeAreaView style={styles.container}>
-      <KeyboardAvoidingView
-        style={{ flex: 1 }}
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        keyboardVerticalOffset={100}
-      >
-        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-          <View style={{ flex: 1 }}>
-            {/* Header */}
-            <View style={styles.header}>
-              <View style={styles.headerContent}>
-                <Image 
-                  source={require('../assets/langford-logo.jpg')} 
-                  style={styles.headerLogo}
-                  resizeMode="contain"
-                />
-                <View style={styles.headerText}>
-                  <Text style={styles.headerTitle}>Daily Log Entry</Text>
-                  <Text style={styles.headerSubtitle}>Langford Mechanical</Text>
-                </View>
-              </View>
-              
-              <View style={styles.headerButtons}>
-                {userEmail.toLowerCase() === 'brian@langfordmechanical.com' && (
-                  <TouchableOpacity 
-                    style={styles.adminButton}
-                    onPress={() => navigation.navigate('Admin')}
-                  >
-                    <Text style={styles.adminButtonText}>Admin</Text>
-                  </TouchableOpacity>
-                )}
-                <TouchableOpacity 
-                  style={styles.logoutButton}
-                  onPress={handleLogout}
-                >
-                  <Text style={styles.logoutButtonText}>Logout</Text>
-                </TouchableOpacity>
-              </View>
-            </View>
-
-            <ScrollView
-              contentContainerStyle={styles.scrollContainer}
-              keyboardShouldPersistTaps="handled"
-              showsVerticalScrollIndicator={false}
+      {/* Header */}
+      <View style={styles.header}>
+        <View style={styles.headerContent}>
+          <Image 
+            source={require('../assets/langford-logo.jpg')} 
+            style={styles.headerLogo}
+            resizeMode="contain"
+          />
+          <View style={styles.headerText}>
+            <Text style={styles.headerTitle}>Daily Log Entry</Text>
+            <Text style={styles.headerSubtitle}>Langford Mechanical</Text>
+          </View>
+        </View>
+        
+        <View style={styles.headerButtons}>
+          {userEmail.toLowerCase() === 'brian@langfordmechanical.com' && (
+            <TouchableOpacity 
+              style={styles.adminButton}
+              onPress={() => navigation.navigate('Admin')}
             >
+              <Text style={styles.adminButtonText}>Admin</Text>
+            </TouchableOpacity>
+          )}
+          <TouchableOpacity 
+            style={styles.logoutButton}
+            onPress={handleLogout}
+          >
+            <Text style={styles.logoutButtonText}>Logout</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+
+      <ScrollView
+        contentContainerStyle={styles.scrollContainer}
+        keyboardShouldPersistTaps="handled"
+        showsVerticalScrollIndicator={false}
+        onScrollBeginDrag={() => Keyboard.dismiss()}
+      >
               {/* Form Sections */}
               <View style={styles.formSection}>
                 <Text style={styles.sectionTitle}>Project Information</Text>
@@ -489,9 +481,6 @@ export default function LogEntryScreen({ route }) {
                 )}
               </View>
             </ScrollView>
-          </View>
-        </TouchableWithoutFeedback>
-      </KeyboardAvoidingView>
 
       {/* Foreman Dropdown Modal */}
       <Modal
@@ -508,7 +497,7 @@ export default function LogEntryScreen({ route }) {
           <View style={styles.dropdownModal}>
             <ScrollView style={styles.dropdownScroll}>
               {foremen.map((foreman) => 
-                renderDropdownItem(foreman.name, setForemanName, foremanName)
+                renderDropdownItem(foreman.name, setForemanName, foremanName, false, foreman.id)
               )}
             </ScrollView>
           </View>
@@ -529,8 +518,8 @@ export default function LogEntryScreen({ route }) {
         >
           <View style={styles.dropdownModal}>
             <ScrollView style={styles.dropdownScroll}>
-              {employeeOptions.map((employee) => 
-                renderDropdownItem(employee, setPickerValue, pickerValue, true)
+              {employeeOptions.map((employee, index) => 
+                renderDropdownItem(employee, setPickerValue, pickerValue, true, `employee-${index}-${employee}`)
               )}
             </ScrollView>
           </View>
@@ -615,9 +604,8 @@ const styles = StyleSheet.create({
     fontWeight: '600',
   },
   scrollContainer: {
-    flexGrow: 1,
     padding: 20,
-    paddingBottom: Platform.OS === 'ios' ? 100 : 60,
+    paddingBottom: 100,
   },
   formSection: {
     backgroundColor: '#fff',

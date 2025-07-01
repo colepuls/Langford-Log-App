@@ -277,8 +277,9 @@ export default function AdminScreen() {
     navigation.goBack();
   };
 
-  const renderDropdownItem = (category, onSelect, currentValue) => (
+  const renderDropdownItem = (category, onSelect, currentValue, key) => (
     <TouchableOpacity
+      key={key}
       style={[
         styles.dropdownItem,
         currentValue === category && styles.dropdownItemSelected
@@ -442,7 +443,7 @@ export default function AdminScreen() {
                   <View key={category} style={styles.categoryBlock}>
                     <Text style={styles.categoryTitle}>{category}</Text>
                     {list.map((name, idx) => (
-                      <View key={idx} style={styles.listItem}>
+                      <View key={`${category}-${name}-${idx}`} style={styles.listItem}>
                         <View style={styles.itemContent}>
                           <Text style={styles.itemName}>{name}</Text>
                         </View>
@@ -486,8 +487,8 @@ export default function AdminScreen() {
         >
           <View style={styles.dropdownModal}>
             <ScrollView style={styles.dropdownScroll}>
-              {uniqueCategories.map(category => 
-                renderDropdownItem(category, setNewCategory, newCategory)
+              {uniqueCategories.map((category, index) => 
+                renderDropdownItem(category, setNewCategory, newCategory, `foreman-${index}-${category}`)
               )}
             </ScrollView>
           </View>
@@ -508,8 +509,8 @@ export default function AdminScreen() {
         >
           <View style={styles.dropdownModal}>
             <ScrollView style={styles.dropdownScroll}>
-              {uniqueCategories.map(category => 
-                renderDropdownItem(category, setSelectedCategory, selectedCategory)
+              {uniqueCategories.map((category, index) => 
+                renderDropdownItem(category, setSelectedCategory, selectedCategory, `employee-${index}-${category}`)
               )}
             </ScrollView>
           </View>
@@ -583,8 +584,8 @@ export default function AdminScreen() {
         >
           <View style={styles.dropdownModal}>
             <ScrollView style={styles.dropdownScroll}>
-              {uniqueCategories.map(category => 
-                renderDropdownItem(category, setEditCategory, editCategory)
+              {uniqueCategories.map((category, index) => 
+                renderDropdownItem(category, setEditCategory, editCategory, `edit-${index}-${category}`)
               )}
             </ScrollView>
           </View>
