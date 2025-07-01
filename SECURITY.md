@@ -176,6 +176,6 @@ service cloud.firestore {
 
 ---
 
-**Last Updated:** January 2025  
+**Last Updated:** July 2025  
 **Security Level:** High  
 **Compliance:** Industry Standard Security Practices 
