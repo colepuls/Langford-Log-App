@@ -14,8 +14,6 @@ This document outlines the security measures implemented in the Langford Log app
 
 ### User Access Control
 - ✅ **Restricted Signup** - Only authorized emails can create accounts
-- ✅ **Email Whitelist** - Currently allows: `brian@langfordmechanical.com`, `colepuls@me.com`
-- ✅ **Case Insensitive** - Email addresses are normalized to lowercase
 
 ## Data Security
 
