@@ -6,13 +6,13 @@ import {
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBeFmbuUy_yITn8wUqXNWzC1SjTbAeHv3U",
-  authDomain: "langfordlog.firebaseapp.com",
-  projectId: "langfordlog",
-  storageBucket: "langfordlog.firebasestorage.app",
-  messagingSenderId: "314671122997",
-  appId: "1:314671122997:web:e3cd05c2b83ee95ad3bf7c",
-  measurementId: "G-6VFCXLYBR1"
+  apiKey: process.env.EXPO_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.EXPO_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.EXPO_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.EXPO_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.EXPO_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.EXPO_PUBLIC_FIREBASE_APP_ID,
+  measurementId: process.env.EXPO_PUBLIC_FIREBASE_MEASUREMENT_ID
 };
 
 // Initialise (or reuse) the app

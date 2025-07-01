@@ -2,13 +2,13 @@ import { initializeApp } from 'firebase/app';
 import { getFirestore, doc, setDoc, getDoc, updateDoc, arrayUnion } from 'firebase/firestore';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBeFmbuUy_yITn8wUqXNWzC1SjTbAeHv3U",
-  authDomain: "langfordlog.firebaseapp.com",
-  projectId: "langfordlog",
-  storageBucket: "langfordlog.firebasestorage.app",
-  messagingSenderId: "314671122997",
-  appId: "1:314671122997:web:e3cd05c2b83ee95ad3bf7c",
-  measurementId: "G-6VFCXLYBR1"
+  apiKey: process.env.FIREBASE_API_KEY,
+  authDomain: process.env.FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.FIREBASE_PROJECT_ID,
+  storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.FIREBASE_APP_ID,
+  measurementId: process.env.FIREBASE_MEASUREMENT_ID
 };
 
 const app = initializeApp(firebaseConfig);
