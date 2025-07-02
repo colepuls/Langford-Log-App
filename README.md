@@ -71,4 +71,4 @@ The app uses modern React Native patterns with component-based architecture. Ima
 
 ##
 
-### Made by Cole Puls
+**Made by Cole Puls**
