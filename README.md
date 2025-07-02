@@ -69,4 +69,6 @@ The app uses modern React Native patterns with component-based architecture. Ima
 - Input validation
 - Secure token management
 
+##
+
 ### Made by Cole Puls
