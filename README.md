@@ -11,12 +11,25 @@ Built for Langford Mechanical & Sheetmetal, INC, this app streamlines daily repo
 - Attach photo evidence
 - Submit reports via email
 
-## Technical Stack
+## Technology Stack
 
-**Frontend:** React Native with Expo  
-**Backend:** Node.js with Express  
-**Authentication:** Firebase Auth  
-**Deployment:** Render
+<div align="center">
+
+### Frontend
+![React Native](https://img.shields.io/badge/React_Native-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![Expo](https://img.shields.io/badge/Expo-1B1F23?style=for-the-badge&logo=expo&logoColor=white)
+![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)
+
+### Backend
+![Node.js](https://img.shields.io/badge/Node.js-43853D?style=for-the-badge&logo=node.js&logoColor=white)
+![Express.js](https://img.shields.io/badge/Express.js-404D59?style=for-the-badge&logo=express)
+![Nodemailer](https://img.shields.io/badge/Nodemailer-0F1419?style=for-the-badge&logo=maildotru&logoColor=white)
+
+### Services & Deployment
+![Firebase](https://img.shields.io/badge/Firebase-039BE5?style=for-the-badge&logo=Firebase&logoColor=white)
+![Render](https://img.shields.io/badge/Render-46E3B7?style=for-the-badge&logo=render&logoColor=white)
+
+</div>
 
 ## Project Structure
 
